@@ -1,4 +1,7 @@
+import qs from "query-string";
 import * as types from "./actionTypes";
+
+const params = qs.parse(window.location.search);
 
 const defaultState = {
   isFetching: false,
@@ -6,8 +9,8 @@ const defaultState = {
   loading: true,
   initialized: false,
 
-  symbol: "BTC",
-  days: 1,
+  symbol: params.symbol || "BTC",
+  days: parseInt(params.days, 10) || 1,
   price: {
     start: 0,
     end: 0,

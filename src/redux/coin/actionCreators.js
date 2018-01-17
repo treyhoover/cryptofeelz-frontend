@@ -1,3 +1,4 @@
+import { updateQueryParams } from "~/utils/history";
 import { percentToEmotion } from "~/utils/emotions";
 import { fetchGif } from "~/redux/feelz/actionCreators";
 import * as actions from "./actions";
@@ -24,11 +25,15 @@ export const fetchCoin = () => (dispatch, getState) => {
 };
 
 export const setSymbol = (symbol) => (dispatch, getState) => {
+  updateQueryParams({ symbol });
+
   dispatch(actions.setSymbol(symbol));
   dispatch(fetchCoin());
 };
 
 export const setDays = (days) => (dispatch, getState) => {
+  updateQueryParams({ days });
+
   dispatch(actions.setDays(days));
   dispatch(fetchCoin());
 };
