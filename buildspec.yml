@@ -1,10 +1,14 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - yarn
   build:
     commands:
-      - yarn && yarn build
+      - yarn build
 
 artifacts:
   files:
     - build/**/*
+  discard-paths: yes
