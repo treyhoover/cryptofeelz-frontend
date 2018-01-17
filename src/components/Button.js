@@ -10,7 +10,7 @@ const Button = ({ as, color, dark, inverted, padding, disabled, onClick, ...prop
     <ReactyonsButton
       as={as}
       className={`${padding}`}
-      f6 link dim={!disabled} mb2 dib bn pointer={!disabled}
+      f6 link dim={!disabled} mb2 bn pointer={!disabled}
       onClick={disabled ? undefined : onClick}
       {...props}
       {...colorProps}

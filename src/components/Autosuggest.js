@@ -3,16 +3,16 @@ import ReactAutosuggest from 'react-autosuggest';
 import { isObject, isUndefined, isFunction } from "lodash";
 
 const DEFAULT_THEME = {
-  container: 'dib relative bg-white f6 mb2 mr2 w4',
+  container: 'db dib-ns w-100 w-auto-ns relative bg-white f6 mb2 mr2',
   containerOpen: '',
-  input: 'ph3 pv2 outline-0 w4 ba',
+  input: 'ph3 pv2 outline-0 w4-ns bn w-100',
   inputOpen: 'react-autosuggest__input--open',
   inputFocused: 'react-autosuggest__input--focused',
-  suggestionsContainer: 'bl br',
-  suggestionsContainerOpen: 'bb absolute w-100',
-  suggestionsList: 'list ma0 pa0 maxH4 overflow-auto bg-white black',
+  suggestionsContainer: '',
+  suggestionsContainerOpen: 'absolute w-100',
+  suggestionsList: 'list ma0 pa0 maxH4 overflow-auto bg-white black bt b--black-50',
   suggestion: 'pv1 ph3 tl',
-  suggestionFirst: 'react-autosuggest__suggestion--first',
+  suggestionFirst: '',
   suggestionHighlighted: 'bg-black-10',
   sectionContainer: 'react-autosuggest__section-container',
   sectionContainerFirst: 'react-autosuggest__section-container--first',

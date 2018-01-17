@@ -47,7 +47,7 @@ class App extends React.Component {
     const duration = daysLabelMap[days];
 
     return (
-      <Div flex flex-column flex-auto bg-black-90 sans-serif white>
+      <Div flex flex-column flex-auto bg-black-90 sans-serif white ph2>
         <Div style={{ margin: "auto" }} w-100 mw7>
           <Div o-50={this.loading} mb3>
             {coin.initialized && <Div mt3 mb2 tc f3>
@@ -68,7 +68,7 @@ class App extends React.Component {
               onSelect={this.handleSymbolSelect}
             />
 
-            <Div dib id="durations">
+            <Div db dib-ns w-100 w-auto-ns id="durations">
               {map(daysLabelMap, (label, d) => {
                 const active = String(days) === d;
 
@@ -76,7 +76,10 @@ class App extends React.Component {
                   <Button
                     key={d}
                     name={d}
-                    dib
+                    db
+                    dib-ns
+                    w-100
+                    w-auto-ns
                     ttc
                     onClick={this.handleDurationClick}
                     inverted={active}
