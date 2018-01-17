@@ -3,3 +3,23 @@
     display: flex;
     flex-direction: column;
 }
+
+.maxH1 {
+    max-height: 1rem
+}
+
+.maxH2 {
+    max-height: 2rem
+}
+
+.maxH3 {
+    max-height: 4rem
+}
+
+.maxH4 {
+    max-height: 8rem
+}
+
+.maxH5 {
+    max-height: 16rem
+}

@@ -4,6 +4,7 @@ const defaultState = {
   isFetching: false,
   error: null,
   loading: true,
+  initialized: false,
 
   symbol: "BTC",
   days: 1,
@@ -46,6 +47,7 @@ export default (state = defaultState, action) => {
         loading: false,
         price: action.payload.price,
         error: null,
+        initialized: true,
       }
     }
 
