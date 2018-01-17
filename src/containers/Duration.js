@@ -26,14 +26,22 @@ class Duration extends React.Component {
   get durations() {
     const { input } = this.state;
 
-    const matches = ALL_DURATIONS.filter(({ label }) => label.startsWith(input));
-
-    if (matches.length === 1 && matches[0].label === input) {
-      return ALL_DURATIONS;
-    } else {
-      return matches;
-    }
+    return ALL_DURATIONS.filter(({ label }) => label.startsWith(input));
   }
+
+  handleFocus = e => {
+    e.target.select();
+  };
+
+  handleKeyPress = e => {
+    if (e.key === "Enter") {
+      const selected = this.durations[0];
+
+      this.setState({ input: selected.label });
+
+      this.props.setDays(selected.value);
+    }
+  };
 
   handleChange = e => {
     this.setState({ input: e.target.value });
@@ -56,9 +64,14 @@ class Duration extends React.Component {
       <Autocomplete
         getItemValue={item => String(item.value)}
         items={this.durations}
-        inputProps={{
-          className: "mh2 w3 ph2 tc",
-        }}
+        renderInput={props => (
+          <input
+            {...props}
+            className="mh2 w3 ph2 tc"
+            onFocus={this.handleFocus}
+            onKeyPress={this.handleKeyPress}
+          />
+        )}
         renderItem={(item, isHighlighted) => {
           const itemProps = {
             "pa1": true,
