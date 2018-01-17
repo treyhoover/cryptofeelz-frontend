@@ -22,3 +22,13 @@ export const fetchCoin = () => (dispatch, getState) => {
       dispatch(actions.fetchCoinError(error));
     });
 };
+
+export const setSymbol = (symbol) => (dispatch, getState) => {
+  dispatch(actions.setSymbol(symbol));
+  dispatch(fetchCoin());
+};
+
+export const setDays = (days) => (dispatch, getState) => {
+  dispatch(actions.setDays(days));
+  dispatch(fetchCoin());
+};

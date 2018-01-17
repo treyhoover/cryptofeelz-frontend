@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { Div, Span, P, Video } from 'reactyons';
+import { Div, Video } from 'reactyons';
+import Symbol from "~/containers/Symbol";
+import Duration from "~/containers/Duration";
+import Percentage from "~/components/Percentage";
 import { fetchCoin } from "~/redux/coin/actionCreators";
 import { getCoin } from "~/redux/coin/selectors";
 import { getFeelz } from "~/redux/feelz/selectors";
@@ -12,22 +15,19 @@ class App extends React.Component {
 
   render() {
     const { coin, feelz } = this.props;
-    const { symbol, days: t, price: { percentChange } } = coin;
-    const duration = t === 1 ? "24 hours" : `${t} days`;
-    const p = Math.abs(Math.floor(percentChange));
+    const { price: { percentChange } } = coin;
     const upOrDown = percentChange >= 0 ? "up" : "down";
-    const c = { green: percentChange >= 0, red: percentChange < 0 };
 
     if (coin.error || feelz.error) return "Error!";
     if (coin.loading || feelz.loading) return "Loading...";
 
     return (
-      <Div flex flex-column flex-auto pa7 bg-black-80>
+      <Div flex flex-column flex-auto pa7 bg-black-90>
         <Video autoPlay loop src={feelz.url} />
 
-        <P tc sans-serif white>
-          When {symbol} is {upOrDown} <Span {...c}>{p}%</Span> in the past {duration}...
-        </P>
+        <Div mt3 mb4 tc sans-serif white>
+          When <Symbol /> is {upOrDown} <Percentage>{percentChange}</Percentage> in the past <Duration />
+        </Div>
       </Div>
     );
   }
