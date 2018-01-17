@@ -1,7 +1,7 @@
 import React from "react";
 import { Button as ReactyonsButton } from "reactyons";
 
-const Button = ({ as, color, dark, inverted, padding, ...props }) => {
+const Button = ({ as, color, dark, inverted, padding, disabled, onClick, ...props }) => {
   const l = dark ? "dark" : "light";
   const fg = (dark && !inverted) ? "white" : "black";
   const bg = inverted ? color : `bg-${l}-${color}`;
@@ -10,7 +10,8 @@ const Button = ({ as, color, dark, inverted, padding, ...props }) => {
     <ReactyonsButton
       as={as}
       className={`${padding}`}
-      f6 link dim mb2 dib bn pointer
+      f6 link dim={!disabled} mb2 dib bn pointer={!disabled}
+      onClick={disabled ? undefined : onClick}
       {...props}
       {...colorProps}
     />
@@ -23,6 +24,7 @@ Button.defaultProps = {
   dark: true,
   inverted: false,
   padding: "ph3 pv2",
+  disabled: false,
 };
 
 export default Button;

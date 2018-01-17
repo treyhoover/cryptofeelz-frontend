@@ -6,7 +6,7 @@ const percentEmotionMap = {
   "-5": ["no", "dislike", "shake head", "disappointed", "facepalm"],
   "0": ["whatever", "eye roll", "bored", "shrug", "waiting", "tired"],
   "5": ["k", "thumbs up", "yes"],
-  "10": ["party", "good job", "popcorn", "happy"],
+  "10": ["party", "good job", "popcorn", "happy", "oh yeah"],
   "25": ["rich", "making it rain"],
 };
 
