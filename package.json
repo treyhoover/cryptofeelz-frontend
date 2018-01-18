@@ -58,7 +58,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "deploy": "yarn build && aws s3 sync build s3://cryptofeelz-prod"
+    "deploy": "aws s3 sync build s3://cryptofeelz.com"
   },
   "jest": {
     "collectCoverageFrom": [
