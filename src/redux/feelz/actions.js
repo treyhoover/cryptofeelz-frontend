@@ -5,13 +5,12 @@ export const fetchGif = () => ({
   type: types.FETCH_GIF,
 });
 
-export const fetchGifSuccess = (url) => ({
+export const fetchGifSuccess = (query, urls) => ({
   type: types.FETCH_GIF_SUCCESS,
-  payload: { url },
+  payload: { query, urls },
 });
 
 export const fetchGifError = (error) => ({
   type: types.FETCH_GIF_ERROR,
   payload: { error },
 });
-

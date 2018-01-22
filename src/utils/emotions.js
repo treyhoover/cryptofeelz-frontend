@@ -2,7 +2,7 @@ import { sample } from "lodash";
 
 const percentEmotionMap = {
   "-25": ["broke", "fml", "screaming"],
-  "-10": ["crying", "stop it", "why"],
+  "-10": ["crying", "why"],
   "-5": ["no", "dislike", "shake head", "disappointed", "facepalm"],
   "0": ["whatever", "eye roll", "bored", "shrug", "waiting", "tired"],
   "5": ["k", "thumbs up", "yes"],

@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { map } from "lodash";
-import { Div, Video } from 'reactyons';
+import { Div, Img } from 'reactyons';
+import { percentToEmotion } from "~/utils/emotions";
 import Percentage from "~/components/Percentage";
 import Button from "~/components/Button";
 import { fetchCoin, setSymbol, setDays } from "~/redux/coin/actionCreators";
+import { fetchGif } from "~/redux/feelz/actionCreators";
 import { getCoin } from "~/redux/coin/selectors";
 import { getFeelz } from "~/redux/feelz/selectors";
 import Autosuggest from "~/components/Autosuggest";
@@ -40,6 +42,12 @@ class App extends React.Component {
     this.props.setDays(days);
   };
 
+  handleRefreshClick = e => {
+    const emotion = percentToEmotion(this.props.coin.price.percentChange);
+
+    this.props.fetchGif(emotion);
+  };
+
   render() {
     const { coin, feelz } = this.props;
     const { symbol, days, price: { percentChange } } = coin;
@@ -56,7 +64,7 @@ class App extends React.Component {
             </Div>}
 
             <Div aspect-ratio aspect-ratio--16x9>
-              <Video aspect-ratio--object cover autoPlay loop src={feelz.url} />
+              {feelz.url && <Img aspect-ratio--object cover src={feelz.url} />}
             </Div>
           </Div>
 
@@ -90,6 +98,20 @@ class App extends React.Component {
                 );
               })}
             </Div>
+
+            <Button
+              name="refresh"
+              db
+              dib-ns
+              w-100
+              w-auto-ns
+              ttc
+              ml0
+              ml2-ns
+              onClick={this.handleRefreshClick}
+            >
+              Refresh
+            </Button>
           </Div>
         </Div>
       </Div>
@@ -106,4 +128,5 @@ export default connect(mapStateToProps, {
   fetchCoin,
   setSymbol,
   setDays,
+  fetchGif,
 })(App);

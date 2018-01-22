@@ -1,17 +1,22 @@
-import { sample } from "lodash";
 import giphy from "~/api/giphy";
 import * as actions from "./actions";
 
 export const fetchGif = (q) => (dispatch, getState) => {
+  const { feelz } = getState();
+
   dispatch(actions.fetchGif());
 
-  giphy.search('gifs', { q })
-    .then(response => {
-      const random = sample(response.data);
+  if (q in feelz.emotions) {
+    dispatch(actions.fetchGifSuccess(q, feelz.emotions[q]));
+  } else {
+    giphy.search('gifs', { q })
+      .then(response => {
+        const gifs = response.data.map(gif => gif.images.downsized_medium.gif_url);
 
-      dispatch(actions.fetchGifSuccess(random.images.looping.mp4_url));
-    })
-    .catch(error => {
-      dispatch(actions.fetchGifError(error));
-    });
+        dispatch(actions.fetchGifSuccess(q, gifs));
+      })
+      .catch(error => {
+        dispatch(actions.fetchGifError(error));
+      });
+  }
 };
