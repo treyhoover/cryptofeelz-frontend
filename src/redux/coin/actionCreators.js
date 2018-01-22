@@ -1,6 +1,7 @@
 import { updateQueryParams } from "~/utils/history";
 import { percentToEmotion } from "~/utils/emotions";
 import { fetchGif } from "~/redux/feelz/actionCreators";
+import { fetchCoinHistory } from "~/api/coin";
 import * as actions from "./actions";
 
 export const fetchCoin = () => (dispatch, getState) => {
@@ -8,12 +9,8 @@ export const fetchCoin = () => (dispatch, getState) => {
 
   dispatch(actions.fetchCoin());
 
-  fetch(`http://coincap.io/history/${days}day/${symbol}`)
-    .then(res => res.json())
-    .then(({ price }) => {
-      const start = price[0][1];
-      const end = price.slice(-1)[0][1];
-      const percentChange = (end / start - 1) * 100;
+  fetchCoinHistory({ days, symbol })
+    .then(({ start, end, percentChange }) => {
       const emotion = percentToEmotion(percentChange);
 
       dispatch(actions.fetchCoinSuccess({ start, end, percentChange }));
