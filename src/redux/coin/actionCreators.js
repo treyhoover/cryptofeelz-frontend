@@ -1,7 +1,7 @@
 import { updateQueryParams } from "~/utils/history";
 import { percentToEmotion } from "~/utils/emotions";
 import { fetchGif } from "~/redux/feelz/actionCreators";
-import { fetchCoinHistory } from "~/api/coin";
+import { fetchCoinHistory, fetchCoinCurrent } from "~/api/coin";
 import * as actions from "./actions";
 
 export const fetchCoin = () => (dispatch, getState) => {
@@ -9,7 +9,15 @@ export const fetchCoin = () => (dispatch, getState) => {
 
   dispatch(actions.fetchCoin());
 
-  fetchCoinHistory({ days, symbol })
+  const historical = fetchCoinHistory({ days, symbol });
+  const current = fetchCoinCurrent({ symbol });
+
+  Promise.all([historical, current])
+    .then(([start, end]) => {
+      const percentChange = (end / start - 1) * 100;
+
+      return { start, end, percentChange };
+    })
     .then(({ start, end, percentChange }) => {
       const emotion = percentToEmotion(percentChange);
 
