@@ -5,12 +5,12 @@ import { fetchCoinHistory, fetchCoinCurrent } from "~/api/coin";
 import * as actions from "./actions";
 
 export const fetchCoin = () => (dispatch, getState) => {
-  const { coin: { days, symbol } } = getState();
+  const { coin: { days, symbol, price } } = getState();
 
   dispatch(actions.fetchCoin());
 
   const historical = fetchCoinHistory({ days, symbol });
-  const current = fetchCoinCurrent({ symbol });
+  const current = price.end > 0 ? Promise.resolve(price.end) : fetchCoinCurrent({ symbol });
 
   Promise.all([historical, current])
     .then(([start, end]) => {

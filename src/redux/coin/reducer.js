@@ -25,6 +25,10 @@ export default (state = defaultState, action) => {
         ...state,
         days: action.payload.days,
         loading: true,
+        price: {
+          ...state.price,
+          start: 0,
+        }
       }
     }
 
@@ -33,6 +37,11 @@ export default (state = defaultState, action) => {
         ...state,
         symbol: action.payload.symbol,
         loading: true,
+        price: {
+          start: 0,
+          end: 0,
+          percentChange: 0,
+        }
       }
     }
 
