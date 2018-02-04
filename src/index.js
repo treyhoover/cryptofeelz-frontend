@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route,
+  Switch,
 } from 'react-router-dom'
 import { store } from "./redux";
 import Home from './pages/Home';
@@ -14,7 +15,10 @@ const rootEl = document.getElementById('root');
 ReactDOM.render((
   <Provider store={store}>
     <Router>
-      <Route exact path="/" component={Home} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/feelz/:id" component={Home} />
+      </Switch>
     </Router>
   </Provider>
 ), rootEl);

@@ -9,3 +9,7 @@ export const fetchFeel = ({ symbol = "BTC", days = 1 }) => {
     .then(res => res.json());
 };
 
+export const fetchFeelById = id => {
+  return fetch(`${REACT_APP_API_ROOT}/feelz/${id}`)
+    .then(res => res.json());
+};

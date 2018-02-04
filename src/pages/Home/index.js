@@ -1,5 +1,7 @@
 import React from "react";
-import { map } from "lodash";
+import { map, get } from "lodash";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 import { connect } from "react-redux";
 import { Button, Dropdown, Header, Container, Input } from "semantic-ui-react";
 import { fetchFeel, setSymbol, setDays } from "~/redux/feel/actionCreators";
@@ -16,7 +18,7 @@ const daysLabelMap = {
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.fetchFeel();
+    this.props.fetchFeel(this.id);
   }
 
   get loading() {
@@ -25,8 +27,18 @@ class App extends React.Component {
     return feel.loading;
   }
 
+  get id() {
+    return get(this.props, "match.params.id");
+  }
+
   handleSymbolSelect = (e, { value }) => {
+    const { history } = this.props;
+
     if (!!value) {
+      if (this.id) {
+        history.push("/");
+      }
+
       this.props.setSymbol(value);
     }
   };
@@ -41,18 +53,22 @@ class App extends React.Component {
   };
 
   handleDurationClick = e => {
-    const { feel } = this.props;
+    const { feel, history } = this.props;
 
     const days = Number(e.target.name);
     const changed = feel.days !== days;
 
     if (changed) {
+      if (this.id) {
+        history.push("/");
+      }
+
       this.props.setDays(days);
     }
   };
 
   handleRefreshClick = e => {
-    this.props.fetchFeel();
+    this.props.fetchFeel(this.id);
   };
 
   render() {
@@ -142,8 +158,11 @@ const mapStateToProps = state => ({
   browser: state.browser,
 });
 
-export default connect(mapStateToProps, {
-  setSymbol,
-  setDays,
-  fetchFeel,
-})(App);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {
+    setSymbol,
+    setDays,
+    fetchFeel,
+  })
+)(App);
