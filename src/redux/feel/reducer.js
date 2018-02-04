@@ -1,11 +1,14 @@
+import qs from "query-string";
 import * as types from "./actionTypes";
+
+const params = qs.parse(window.location.search);
 
 const defaultState = {
   id: null,
   caption: "",
   permalink: "",
-  symbol: "BTC",
-  days: 1,
+  symbol: params.symbol || "BTC",
+  days: parseInt(params.days, 10) || 1,
   percent: null,
   gif: null,
   emotion: null,
