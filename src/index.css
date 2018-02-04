@@ -4,3 +4,7 @@ html, body, :global(#root) {
     height: 100%;
     min-height: 100vh;
 }
+
+:global(.ui.selection.dropdown), :global(.ui.button) {
+    border: 1px solid transparent !important;
+}
