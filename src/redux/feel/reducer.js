@@ -1,47 +1,58 @@
-import { sample } from 'lodash';
 import * as types from "./actionTypes";
 
 const defaultState = {
+  id: null,
+  caption: "",
+  permalink: "",
+  symbol: "BTC",
+  days: 1,
+  percent: null,
+  gif: null,
+  emotion: null,
+  createdAt: null,
+  updatedAt: null,
+
   isFetching: false,
   error: null,
   loading: true,
-  currentEmotion: "",
-  url: "",
-  emotions: {},
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case types.FETCH_GIF: {
+    case types.SET_SYMBOL: {
+      return {
+        ...state,
+        symbol: action.payload.symbol,
+      };
+    }
+
+    case types.SET_DAYS: {
+      return {
+        ...state,
+        days: action.payload.days,
+      };
+    }
+
+    case types.FETCH_FEEL: {
       return {
         ...state,
         isFetching: true,
       }
     }
 
-    case types.REFRESH_GIF: {
-      return {
-        ...state,
-        url: sample(state.emotions[state.currentEmotion]),
-      }
-    }
+    case types.FETCH_FEEL_SUCCESS: {
+      const { feel } = action.payload;
 
-    case types.FETCH_GIF_SUCCESS: {
       return {
         ...state,
+        ...feel,
         isFetching: false,
         loading: false,
-        currentEmotion: action.payload.query,
-        url: sample(action.payload.urls),
-        emotions: {
-          ...state.emotions,
-          [action.payload.query]: action.payload.urls,
-        },
         error: null,
       }
     }
 
-    case types.FETCH_GIF_ERROR: {
+    case types.FETCH_FEEL_ERROR: {
       return {
         ...state,
         isFetching: false,

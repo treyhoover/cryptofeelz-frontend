@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
-import coin from "./coin/reducer";
-import feelz from "./feelz/reducer";
+import feel from "./feel/reducer";
 
 export default combineReducers({
-  coin,
-  feelz,
+  feel,
 });
