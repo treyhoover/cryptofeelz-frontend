@@ -50,6 +50,10 @@
     margin-bottom: 1em;
 }
 
+.permalinkContainer {
+    margin: auto;
+}
+
 :global(.ui).pageContent {
     margin: auto;
     text-align: center;

@@ -104,7 +104,7 @@ class App extends React.Component {
                   src={`https://media1.giphy.com/media/${feel.gif}/200.gif`}
                 />}
 
-                <div>
+                <div className={styles.permalinkContainer} style={{ width: feel.width }}>
                   <Input
                     id="permalink"
                     readOnly
