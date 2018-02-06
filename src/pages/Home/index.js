@@ -10,6 +10,8 @@ import { getFeel } from "~/redux/feel/selectors";
 import * as coin from "~/constants/coins";
 import styles from "./styles.css";
 
+const { REACT_APP_API_ROOT } = process.env;
+
 const daysLabelMap = {
   "1": "24 hours",
   "7": "week",
@@ -82,8 +84,8 @@ class App extends React.Component {
           <title>Cryptofeelz</title>
           <meta property="og:title" content={feel.caption} />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content={`${window.location.origin}/${feel.id}`} />
-          <meta property="og:image" content={`${window.location.origin}/${feel.id}.gif`} />
+          <meta property="og:url" content={`${window.location.href}`} />
+          <meta property="og:image" content={`${REACT_APP_API_ROOT}/feelz/${feel.id}.gif`} />
         </Helmet>
 
         <div className={styles.homePage}>
