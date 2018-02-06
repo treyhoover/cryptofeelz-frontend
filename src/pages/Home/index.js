@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { Button, Dropdown, Header, Container, Input } from "semantic-ui-react";
+import { Helmet } from "react-helmet";
 import { fetchFeel, setSymbol, setDays } from "~/redux/feel/actionCreators";
 import { getFeel } from "~/redux/feel/selectors";
 import * as coin from "~/constants/coins";
@@ -76,79 +77,89 @@ class App extends React.Component {
     const sm = browser.lessThan.medium;
 
     return (
-      <div className={styles.homePage}>
-        <Container className={styles.pageContent}>
-          <div>
-            {feel.caption && <Header as="h1" inverted>
+      <React.Fragment>
+        <Helmet>
+          <title>Cryptofeelz</title>
+          <meta property="og:title" content={feel.caption} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={`${window.location.origin}/${feel.id}`} />
+          <meta property="og:image" content={`${window.location.origin}/${feel.id}.gif`} />
+        </Helmet>
+
+        <div className={styles.homePage}>
+          <Container className={styles.pageContent}>
+            <div>
+              {feel.caption && <Header as="h1" inverted>
               <span dangerouslySetInnerHTML={{
                 __html: feel.formattedCaption
               }} />
-            </Header>}
+              </Header>}
 
-            <div className={styles.gifContainer}>
-              {feel.gif && <img
-                className={styles.gif}
-                alt={feel.emotion}
-                src={`https://media1.giphy.com/media/${feel.gif}/200.gif`}
-              />}
+              <div className={styles.gifContainer}>
+                {feel.gif && <img
+                  className={styles.gif}
+                  alt={feel.emotion}
+                  src={`https://media1.giphy.com/media/${feel.gif}/200.gif`}
+                />}
 
-              <div>
-                <Input
-                  id="permalink"
-                  readOnly
-                  value={feel.permalink}
-                  action={<Button icon="copy" onClick={this.handleCopyPermalink} />}
-                  onClick={this.handlePermalinkClick}
-                  fluid
-                />
+                <div>
+                  <Input
+                    id="permalink"
+                    readOnly
+                    value={feel.permalink}
+                    action={<Button icon="copy" onClick={this.handleCopyPermalink} />}
+                    onClick={this.handlePermalinkClick}
+                    fluid
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
 
-          <div className={styles.controls}>
-            <div className={styles.dropdownGroup}>
-              <Dropdown
-                className={styles.dropdown}
-                placeholder="Select coin"
-                value={feel.symbol}
-                options={coin.options}
-                search
-                selection
-                onChange={this.handleSymbolSelect}
-              />
+            <div className={styles.controls}>
+              <div className={styles.dropdownGroup}>
+                <Dropdown
+                  className={styles.dropdown}
+                  placeholder="Select coin"
+                  value={feel.symbol}
+                  options={coin.options}
+                  search
+                  selection
+                  onChange={this.handleSymbolSelect}
+                />
 
-              <Button
-                attached="right"
-                primary
-                toggle
-                icon="refresh"
-                onClick={this.handleRefreshClick}
-              />
+                <Button
+                  attached="right"
+                  primary
+                  toggle
+                  icon="refresh"
+                  onClick={this.handleRefreshClick}
+                />
+              </div>
+
+              <div className={styles.durations}>
+                <Button.Group vertical={sm} widths={sm ? "4" : undefined}>
+                  {map(daysLabelMap, (label, d) => {
+                    const active = String(feel.days) === d;
+
+                    return (
+                      <Button
+                        key={d}
+                        name={d}
+                        onClick={this.handleDurationClick}
+                        primary={active}
+                      >
+                        {label}
+                      </Button>
+                    );
+                  })}
+                </Button.Group>
+              </div>
             </div>
 
-            <div className={styles.durations}>
-              <Button.Group vertical={sm} widths={sm ? "4" : undefined}>
-                {map(daysLabelMap, (label, d) => {
-                  const active = String(feel.days) === d;
-
-                  return (
-                    <Button
-                      key={d}
-                      name={d}
-                      onClick={this.handleDurationClick}
-                      primary={active}
-                    >
-                      {label}
-                    </Button>
-                  );
-                })}
-              </Button.Group>
-            </div>
-          </div>
-
-        </Container>
-      </div>
+          </Container>
+        </div>
+      </React.Fragment>
     );
   }
 }
