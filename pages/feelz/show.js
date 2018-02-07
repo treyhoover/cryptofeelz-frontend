@@ -39,7 +39,7 @@ class ShowFeelzPage extends React.Component {
   }
 
   render() {
-    const { data: { feel, og }, error, url } = this.props;
+    const { data: { feel }, og, error, url } = this.props;
 
     return (
       <Layout title={`Cryptofeelz | ${feel.caption}`} og={og}>
