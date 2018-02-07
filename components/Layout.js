@@ -1,6 +1,5 @@
 import React from "react";
 import Head from 'next/head'
-import semantic from "semantic-ui/dist/semantic.min.css";
 
 const Layout = ({ children, title, og }) => (
   <React.Fragment>
@@ -14,9 +13,9 @@ const Layout = ({ children, title, og }) => (
       {og.type && <meta property="og:type" content={og.type} />}
       {og.url && <meta property="og:url" content={og.url} />}
       {og.image && <meta property="og:image" content={og.image} />}
-    </Head>
 
-    <style jsx global>{semantic}</style>
+      <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css' />
+    </Head>
 
     {children}
 
