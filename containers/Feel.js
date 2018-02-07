@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { map } from "lodash";
-import { Input, Button, Dropdown } from "semantic-ui-react";
+import { Input, Button, Dropdown, Segment, Header } from "semantic-ui-react";
 import * as coin from "../constants/coins";
 import { fetchFeel, setSymbol, setDays } from "../redux/feel/actionCreators";
-import Feel from "../components/Feel";
 
 const daysLabelMap = {
   "1": "24 hours",
@@ -54,7 +53,11 @@ class FeelContainer extends React.Component {
 
     return (
       <div>
-        <Feel {...feel} />
+        <Segment basic>
+          <Header inverted>{feel.caption}</Header>
+
+          <img src={`https://media1.giphy.com/media/${feel.gif}/200.gif`} alt={feel.caption} />
+        </Segment>
 
         <div style={{ width: feel.width, margin: "auto" }}>
           <Input
