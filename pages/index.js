@@ -5,7 +5,7 @@ import { fetchFeel, setSymbol, setDays } from "../redux/feel/actionCreators";
 import * as feelzApi from "../api/feelz";
 import Layout from "../components/Layout";
 import Feel from "../containers/Feel";
-import { fixedHeight200 } from "../utils/giphy";
+import { fixedHeight200Mp4 } from "../utils/giphy";
 import { initStore } from "../redux/store"
 
 class NewFeelzPage extends React.Component {
@@ -15,8 +15,8 @@ class NewFeelzPage extends React.Component {
 
     return {
       title: feel.caption,
-      type: "website",
-      image: fixedHeight200(feel.gif),
+      type: "video",
+      video: fixedHeight200Mp4(feel.gif),
     };
   };
 

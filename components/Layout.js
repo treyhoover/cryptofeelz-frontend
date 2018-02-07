@@ -10,10 +10,9 @@ const Layout = ({ children, title, og }) => (
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
 
       {/* Open Graph Tags */}
-      {og.title && <meta property="og:title" content={og.title} />}
-      {og.type && <meta property="og:type" content={og.type} />}
-      {og.url && <meta property="og:url" content={og.url} />}
-      {og.image && <meta property="og:image" content={og.image} />}
+      {Object.entries(og).map(([key, value]) => (
+        <meta key={key} property={`og:${key}`} content={value} />
+      ))}
 
       <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css' />
     </Head>
