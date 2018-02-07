@@ -37,7 +37,7 @@ class NewFeelzPage extends React.Component {
 
     return (
       <Layout title={`Cryptofeelz | ${feel.caption}`} og={og}>
-        This is the new feelz page!
+        <h1 className="ui header">This is the new feelz page!</h1>
 
         <Feel {...feel} />
       </Layout>
