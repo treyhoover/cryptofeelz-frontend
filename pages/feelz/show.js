@@ -1,8 +1,11 @@
-import * as feelzApi from "../../api/feelz";
 import React from "react";
+import withRedux from "next-redux-wrapper";
+import * as feelzApi from "../../api/feelz";
+import { fetchFeelSuccess, fetchFeelError } from "../../redux/feel/actions"
 import Layout from "../../components/Layout";
-import Feel from "../../components/Feel";
+import Feel from "../../containers/Feel";
 import { fixedHeight200 } from "../../utils/giphy";
+import { initStore } from "../../redux/store"
 
 class ShowFeelzPage extends React.Component {
   static defaultProps;
@@ -17,18 +20,21 @@ class ShowFeelzPage extends React.Component {
     };
   };
 
-  static async getInitialProps({ req, query = {} }) {
+  static async getInitialProps({ store, req, isServer, query = {} }) {
     const { feelzId } = query;
 
     const [feel, error] = await feelzApi.fetchFeel(feelzId);
     const og = ShowFeelzPage.mapFeelToOg(feel);
 
+    if (error) {
+      store.dispatch(fetchFeelError(error));
+    } else {
+      store.dispatch(fetchFeelSuccess(feel));
+    }
+
     return {
-      error,
-      data: {
-        og,
-        feel,
-      },
+      isServer,
+      og,
     };
   }
 
@@ -37,13 +43,25 @@ class ShowFeelzPage extends React.Component {
 
     return (
       <Layout title={`Cryptofeelz | ${feel.caption}`} og={og}>
-        <Feel {...feel} />
+        <Feel />
 
         <style global jsx>{`
-        body {
-          background: #333333;
-        }
-      `}</style>
+            body {
+              background: #333333;
+            }
+
+            #__next {
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              text-align: center;
+            }
+
+            #__next >* {
+              margin: auto;
+            }
+          `}
+        </style>
       </Layout>
     );
   }
@@ -53,4 +71,13 @@ ShowFeelzPage.defaultProps = {
   error: null,
 };
 
-export default ShowFeelzPage;
+const mapStateToProps = ({ feel }) => ({
+  data: {
+    feel,
+  }
+});
+
+const mapDispatchToProps = dispatch => ({
+});
+
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(ShowFeelzPage);

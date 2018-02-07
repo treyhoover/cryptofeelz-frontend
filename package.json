@@ -18,7 +18,8 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "semantic-ui-react": "^0.77.2"
+    "tachyons": "^4.9.1",
+    "tachyons-components": "^1.0.0-1"
   },
   "scripts": {
     "dev": "NODE_ENV=development node server.js",

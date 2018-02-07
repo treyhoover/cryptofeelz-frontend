@@ -11,11 +11,13 @@ app.prepare()
     const server = express();
 
     server.get('/', (req, res) => {
-      return res.redirect("/feelz/new");
+      return app.render(req, res, '/');
     });
 
-    server.get('/feelz/new', (req, res) => {
-      return app.render(req, res, '/feelz/new');
+    server.get('/feelz/:feelzId', (req, res) => {
+      const query = Object.assign({}, req.query, req.params);
+
+      return app.render(req, res, '/feelz/show', query);
     });
 
     server.get('*', (req, res) => {
