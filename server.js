@@ -15,7 +15,7 @@ app.prepare()
       return app.render(req, res, '/');
     });
 
-    server.get('/feelz/:feelzId', (req, res) => {
+    server.get('/feelz/:feelzId/:slug?', (req, res) => {
       const query = Object.assign({}, req.query, req.params);
 
       return app.render(req, res, '/feelz/show', query);
