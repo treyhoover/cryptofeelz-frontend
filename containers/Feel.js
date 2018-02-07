@@ -54,19 +54,17 @@ class FeelContainer extends React.Component {
 
     return (
       <div>
-        <div>
-          <Feel {...feel} />
+        <Feel {...feel} />
 
-          <div style={{ width: feel.width }}>
-            <Input
-              id="permalink"
-              readOnly
-              value={feel.permalink}
-              action={<Button icon="copy" onClick={this.handleCopyPermalink} />}
-              onClick={this.handlePermalinkClick}
-              fluid
-            />
-          </div>
+        <div style={{ width: feel.width, margin: "auto" }}>
+          <Input
+            id="permalink"
+            readOnly
+            value={feel.permalink}
+            action={<Button icon="copy" onClick={this.handleCopyPermalink} />}
+            onClick={this.handlePermalinkClick}
+            fluid
+          />
         </div>
 
         <div>
@@ -88,24 +86,22 @@ class FeelContainer extends React.Component {
           />
         </div>
 
-        <div>
-          <Button.Group>
-            {map(daysLabelMap, (label, d) => {
-              const active = String(feel.days) === d;
+        <Button.Group>
+          {map(daysLabelMap, (label, d) => {
+            const active = String(feel.days) === d;
 
-              return (
-                <Button
-                  key={d}
-                  name={d}
-                  onClick={this.handleDurationClick}
-                  primary={active}
-                >
-                  {label}
-                </Button>
-              );
-            })}
-          </Button.Group>
-        </div>
+            return (
+              <Button
+                key={d}
+                name={d}
+                onClick={this.handleDurationClick}
+                primary={active}
+              >
+                {label}
+              </Button>
+            );
+          })}
+        </Button.Group>
       </div>
     )
   }

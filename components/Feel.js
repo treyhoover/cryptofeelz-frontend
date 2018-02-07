@@ -1,11 +1,12 @@
 import React from "react";
+import { Header, Segment } from "semantic-ui-react";
 
 const Feel = ({ gif, caption }) => (
-  <div>
-    <h1>{caption}</h1>
+  <Segment basic>
+    <Header inverted>{caption}</Header>
 
     <img src={`https://media1.giphy.com/media/${gif}/200.gif`} alt={caption} />
-  </div>
+  </Segment>
 );
 
 Feel.defaultProps = {

@@ -38,6 +38,12 @@ class ShowFeelzPage extends React.Component {
     return (
       <Layout title={`Cryptofeelz | ${feel.caption}`} og={og}>
         <Feel {...feel} />
+
+        <style global jsx>{`
+        body {
+          background: #333333;
+        }
+      `}</style>
       </Layout>
     );
   }

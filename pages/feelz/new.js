@@ -1,5 +1,6 @@
 import React from "react";
 import withRedux from "next-redux-wrapper";
+import { Container } from "semantic-ui-react";
 import { fetchFeelSuccess, fetchFeelError } from "../../redux/feel/actions"
 import { fetchFeel, setSymbol, setDays } from "../../redux/feel/actionCreators";
 import * as feelzApi from "../../api/feelz";
@@ -43,7 +44,27 @@ class NewFeelzPage extends React.Component {
 
     return (
       <Layout title={`Cryptofeelz | ${feel.caption}`} og={og}>
-        <Feel />
+        <Container>
+          <Feel />
+
+          <style global jsx>{`
+            body {
+              background: #333333;
+            }
+
+            #__next {
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              text-align: center;
+            }
+
+            #__next >* {
+              margin: auto;
+            }
+          `}
+          </style>
+        </Container>
       </Layout>
     );
   }
