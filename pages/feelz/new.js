@@ -1,12 +1,15 @@
 import React from "react";
+import withRedux from "next-redux-wrapper";
+import { fetchFeelSuccess, fetchFeelError } from "../../redux/feel/actions"
+import { fetchFeel, setSymbol, setDays } from "../../redux/feel/actionCreators";
 import * as feelzApi from "../../api/feelz";
 import Layout from "../../components/Layout";
-import Feel from "../../components/Feel";
+import Feel from "../../containers/Feel";
 import { fixedHeight200 } from "../../utils/giphy";
+import { initStore } from "../../redux/store"
 
 class NewFeelzPage extends React.Component {
   static defaultProps;
-
   static mapFeelToOg = feel => {
     if (!feel) return {};
 
@@ -17,29 +20,30 @@ class NewFeelzPage extends React.Component {
     };
   };
 
-  static async getInitialProps({ req, query = {} }) {
+  static async getInitialProps({ store, req, isServer, query = {} }) {
     const { symbol, days } = query;
 
     const [feel, error] = await feelzApi.createFeel({ symbol, days });
     const og = NewFeelzPage.mapFeelToOg(feel);
 
+    if (error) {
+      store.dispatch(fetchFeelError(error));
+    } else {
+      store.dispatch(fetchFeelSuccess(feel));
+    }
+
     return {
-      error,
-      data: {
-        feel,
-        og,
-      },
+      isServer,
+      og,
     };
   }
 
   render() {
-    const { data: { feel, og }, error, url } = this.props;
+    const { data: { feel }, og, error, url } = this.props;
 
     return (
       <Layout title={`Cryptofeelz | ${feel.caption}`} og={og}>
-        <h1 className="ui header">This is the new feelz page!</h1>
-
-        <Feel {...feel} />
+        <Feel />
       </Layout>
     );
   }
@@ -47,6 +51,22 @@ class NewFeelzPage extends React.Component {
 
 NewFeelzPage.defaultProps = {
   error: null,
+  isServer: false,
+  data: {},
 };
 
-export default NewFeelzPage;
+const mapStateToProps = ({ feel }) => ({
+  data: {
+    feel,
+  }
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchFeelSuccess,
+  fetchFeelError,
+  fetchFeel,
+  setSymbol,
+  setDays,
+});
+
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(NewFeelzPage);
