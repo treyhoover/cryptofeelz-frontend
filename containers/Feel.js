@@ -14,7 +14,6 @@ const daysLabelMap = {
 };
 
 class FeelContainer extends React.Component {
-
   handleSymbolSelect = (e, { value }) => {
     if (!!value) {
 
@@ -32,7 +31,7 @@ class FeelContainer extends React.Component {
   };
 
   handleDurationClick = e => {
-    const { feel, history } = this.props;
+    const { feel } = this.props;
 
     const days = Number(e.target.name);
     const changed = feel.days !== days;
@@ -47,7 +46,7 @@ class FeelContainer extends React.Component {
   };
 
   handleRefreshClick = e => {
-    this.props.fetchFeel(this.id);
+    this.props.fetchFeel();
   };
 
   render() {
@@ -117,6 +116,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
+  fetchFeel,
   setDays,
   setSymbol,
 })(FeelContainer);
