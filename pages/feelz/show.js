@@ -4,7 +4,7 @@ import * as feelzApi from "../../api/feelz";
 import { fetchFeelSuccess, fetchFeelError } from "../../redux/feel/actions"
 import Layout from "../../components/Layout";
 import Feel from "../../containers/Feel";
-import { fixedHeight200Mp4 } from "../../utils/giphy";
+import { fixedHeight200 } from "../../utils/giphy";
 import { initStore } from "../../redux/store"
 
 class ShowFeelzPage extends React.Component {
@@ -15,8 +15,8 @@ class ShowFeelzPage extends React.Component {
 
     return {
       title: feel.caption,
-      type: "video",
-      video: fixedHeight200Mp4(feel.gif),
+      type: "image",
+      image: fixedHeight200(feel.gif),
     };
   };
 
