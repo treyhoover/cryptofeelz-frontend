@@ -12,7 +12,9 @@ app.prepare()
     const server = express();
 
     server.get('/', (req, res) => {
-      return app.render(req, res, '/');
+      const query = Object.assign({}, req.query, req.params);
+
+      return app.render(req, res, '/', query);
     });
 
     server.get('/feelz/:feelzId/:slug?', (req, res) => {
