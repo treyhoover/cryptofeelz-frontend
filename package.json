@@ -25,9 +25,9 @@
   "scripts": {
     "dev": "NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "pm2 start ecosystem.config.js --env production",
-    "restart": "pm2 restart cryptofeelz --update-env",
-    "stop": "pm2 stop cryptofeelz"
+    "start": "pm2 start ./server.js",
+    "restart": "pm2 restart ./server.js",
+    "stop": "pm2 stop ./server.js"
   },
   "devDependencies": {
     "webpack": "^3.10.0"
