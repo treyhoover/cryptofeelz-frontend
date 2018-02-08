@@ -25,7 +25,7 @@
   "scripts": {
     "dev": "NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "pm2 start ecosystem.config.js",
+    "start": "pm2 start ecosystem.config.js --env=production",
     "restart": "pm2 restart cryptofeelz --update-env",
     "stop": "pm2 stop cryptofeelz"
   },
