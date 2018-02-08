@@ -59,8 +59,15 @@ class FeelContainer extends React.Component {
       <Ui name="feel-container" bg-black vh-100 w-100 flex flex-column pa4>
 
 
-        <Header size="lg" white as="h1" mb4>{feel.caption}</Header>
-
+        <Header
+          size="lg"
+          white
+          as="h1"
+          mb4
+          dangerouslySetInnerHTML={{
+            __html: feel.captionHtml,
+          }}
+        />
 
         <Image
           flex-auto
