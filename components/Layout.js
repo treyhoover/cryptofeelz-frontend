@@ -13,8 +13,6 @@ const Layout = ({ children, title, og }) => (
       {Object.entries(og).map(([key, value]) => (
         <meta key={key} property={`og:${key}`} content={value} />
       ))}
-
-      <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css' />
     </Head>
 
     <style jsx global>{tachyons}</style>
