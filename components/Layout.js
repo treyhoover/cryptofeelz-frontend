@@ -1,26 +1,39 @@
 import React from "react";
 import Head from 'next/head'
+import ReactGA from 'react-ga';
 import tachyons from "tachyons/css/tachyons.min.css";
 
-const Layout = ({ children, title, og }) => (
-  <React.Fragment>
-    <Head>
-      <title>{title}</title>
-      <meta charSet='utf-8' />
-      <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+class Layout extends React.Component {
+  componentDidMount() {
+    ReactGA.initialize('UA-112855262-1');
 
-      {/* Open Graph Tags */}
-      {Object.entries(og).map(([key, value]) => (
-        <meta key={key} property={`og:${key}`} content={value} />
-      ))}
-    </Head>
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
 
-    <style jsx global>{tachyons}</style>
+  render() {
+    const { children, title, og } = this.props;
 
-    {children}
+    return (
+      <React.Fragment>
+        <Head>
+          <title>{title}</title>
+          <meta charSet='utf-8' />
+          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
 
-  </React.Fragment>
-);
+          {/* Open Graph Tags */}
+          {Object.entries(og).map(([key, value]) => (
+            <meta key={key} property={`og:${key}`} content={value} />
+          ))}
+        </Head>
+
+        <style jsx global>{tachyons}</style>
+
+        {children}
+
+      </React.Fragment>
+    );
+  }
+}
 
 Layout.defaultProps = {
   title: "Cryptofeelz",

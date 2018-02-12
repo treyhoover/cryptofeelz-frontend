@@ -56,7 +56,7 @@ class FeelContainer extends React.Component {
     const { feel } = this.props;
 
     return (
-      <Ui name="feel-container" bg-black vh-100 w-100 flex flex-column pa4>
+      <Ui name="feel-container" bg-black vh-100 w-100 flex flex-column pa4 sans-serif>
 
 
         <Header
