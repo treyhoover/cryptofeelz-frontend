@@ -54,7 +54,6 @@ class ShowFeelzPage extends React.Component {
               min-height: 100vh;
               display: flex;
               flex-direction: column;
-              text-align: center;
             }
 
             #__next >* {

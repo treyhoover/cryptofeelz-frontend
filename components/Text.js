@@ -3,14 +3,14 @@ import React from "react";
 import styled from "styled-components";
 import { withTachyons } from "reactyons";
 
-const Image = styled(({ as, children, skin, ...props }) => React
+const Text = styled(({ as, children, skin, ...props }) => React
   .createElement(as, props, children))
   .attrs({
-    // className: ({ skin, theme, ...props }) => classNames()
+    // className: ({ skin, theme, ...props }) => classNames(),
   })``;
 
-Image.defaultProps = {
-  as: "img",
+Text.defaultProps = {
+  as: "span",
 };
 
-export default withTachyons(Image);
+export default withTachyons(Text);

@@ -1,7 +1,6 @@
 import React from "react";
 import Head from 'next/head'
 import ReactGA from 'react-ga';
-import tachyons from "tachyons/css/tachyons.min.css";
 
 class Layout extends React.Component {
   componentDidMount() {
@@ -25,8 +24,6 @@ class Layout extends React.Component {
             <meta key={key} property={`og:${key}`} content={value} />
           ))}
         </Head>
-
-        <style jsx global>{tachyons}</style>
 
         {children}
 

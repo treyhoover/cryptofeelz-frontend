@@ -1,20 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { map } from "lodash";
-import * as coin from "../constants/coins";
+import { Div, Input } from "reactyons";
+// import * as coin from "../constants/coins";
 import { fetchFeel, setSymbol, setDays } from "../redux/feel/actionCreators";
 import Image from "../components/Image";
-import Input from "../components/Input";
-import Ui from "../components/Ui";
-import Header from "../components/Header";
-import Rect from "../components/Rect";
-
-const daysLabelMap = {
-  "1": "24 hours",
-  "7": "week",
-  "30": "month",
-  "365": "year",
-};
+import Text from "../components/Text";
 
 class FeelContainer extends React.Component {
   handleSymbolSelect = (e, { value }) => {
@@ -56,11 +46,10 @@ class FeelContainer extends React.Component {
     const { feel } = this.props;
 
     return (
-      <Ui name="feel-container" bg-black vh-100 w-100 flex flex-column pa4 sans-serif>
+      <Div name="feel-container" bg-black vh-100 w-100 tc flex flex-column pa4 sans-serif>
 
-
-        <Header
-          size="lg"
+        <Text
+          f1
           white
           as="h1"
           mb4
@@ -88,43 +77,7 @@ class FeelContainer extends React.Component {
           onClick={this.handlePermalinkClick}
         />
 
-        {/*<div>*/}
-        {/*<Dropdown*/}
-        {/*placeholder="Select coin"*/}
-        {/*value={feel.symbol}*/}
-        {/*options={coin.options}*/}
-        {/*search*/}
-        {/*selection*/}
-        {/*onChange={this.handleSymbolSelect}*/}
-        {/*/>*/}
-
-        {/*<Button*/}
-        {/*attached="right"*/}
-        {/*primary*/}
-        {/*toggle*/}
-        {/*icon="refresh"*/}
-        {/*onClick={this.handleRefreshClick}*/}
-        {/*/>*/}
-        {/*</div>*/}
-
-        {/*<Button.Group>*/}
-        {/*{map(daysLabelMap, (label, d) => {*/}
-        {/*const active = String(feel.days) === d;*/}
-
-        {/*return (*/}
-        {/*<Button*/}
-        {/*key={d}*/}
-        {/*name={d}*/}
-        {/*onClick={this.handleDurationClick}*/}
-        {/*primary={active}*/}
-        {/*>*/}
-        {/*{label}*/}
-        {/*</Button>*/}
-        {/*);*/}
-        {/*})}*/}
-        {/*</Button.Group>*/}
-
-      </Ui>
+      </Div>
     )
   }
 }

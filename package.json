@@ -17,11 +17,11 @@
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
     "react-redux": "^5.0.6",
+    "reactyons": "^1.1.3",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "tachyons": "^4.9.1",
-    "tachyons-components": "^1.0.0-1"
+    "styled-components": "^3.1.6"
   },
   "scripts": {
     "dev": "NODE_ENV=development node server.js",
@@ -31,6 +31,7 @@
     "stop": "pm2 stop ./server.js"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.5.0",
     "webpack": "^3.10.0"
   }
 }
