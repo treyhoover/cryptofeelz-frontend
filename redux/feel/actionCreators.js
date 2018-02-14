@@ -14,7 +14,6 @@ export const fetchFeel = (id) => async (dispatch, getState) => {
     if (error) return dispatch(actions.fetchFeelError(error));
 
     dispatch(actions.fetchFeelSuccess(feel));
-
   } else {
     const [feel, error] = await feelzApi.createFeel({ symbol, days });
 
@@ -25,13 +24,15 @@ export const fetchFeel = (id) => async (dispatch, getState) => {
 };
 
 export const setSymbol = (symbol) => (dispatch, getState) => {
-  updateQueryParams({ symbol }, { pathname: "/" });
+  const { feel: { days } } = getState();
+  updateQueryParams({ symbol, days }, { pathname: "/" });
 
   dispatch(actions.setSymbol(symbol));
 };
 
 export const setDays = (days) => (dispatch, getState) => {
-  updateQueryParams({ days }, { pathname: "/" });
+  const { feel: { symbol } } = getState();
+  updateQueryParams({ days, symbol }, { pathname: "/" });
 
   dispatch(actions.setDays(days));
 };

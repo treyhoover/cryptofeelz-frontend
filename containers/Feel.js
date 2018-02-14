@@ -30,9 +30,14 @@ class FeelContainer extends React.Component {
   };
 
   handleRefreshClick = e => {
+    const { symbol, days } = this.props.feel;
+
     Router.push({
       pathname: "/",
-      query: getQueryParams(),
+      query: {
+        symbol,
+        days,
+      },
     });
   };
 
