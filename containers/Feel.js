@@ -1,19 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Div, Input } from "reactyons";
-// import * as coin from "../constants/coins";
+import { Div, Input, A, Button } from "reactyons";
+import { getQueryParams } from "../utils/uri";
+import Router from "next/router";
 import { fetchFeel, setSymbol, setDays } from "../redux/feel/actionCreators";
 import Image from "../components/Image";
 import Text from "../components/Text";
 
 class FeelContainer extends React.Component {
-  handleSymbolSelect = (e, { value }) => {
-    if (!!value) {
-
-      this.props.setSymbol(value);
-    }
-  };
-
   handlePermalinkClick = e => {
     e.target.select();
   };
@@ -23,23 +17,23 @@ class FeelContainer extends React.Component {
     document.execCommand('copy');
   };
 
+  handleSymbolSelect = (e) => {
+    const symbol = e.target.attributes.name.value;
+
+    this.props.setSymbol(symbol);
+  };
+
   handleDurationClick = e => {
-    const { feel } = this.props;
+    const days = Number(e.target.attributes.name.value);
 
-    const days = Number(e.target.name);
-    const changed = feel.days !== days;
-
-    if (changed) {
-      if (this.id) {
-        history.push("/");
-      }
-
-      this.props.setDays(days);
-    }
+    this.props.setDays(days);
   };
 
   handleRefreshClick = e => {
-    this.props.fetchFeel();
+    Router.push({
+      pathname: "/",
+      query: getQueryParams(),
+    });
   };
 
   render() {
@@ -67,16 +61,129 @@ class FeelContainer extends React.Component {
           style={{ objectFit: "contain " }}
         />
 
+        <Div name="controls" mb3>
+          <Div>
+            <Button
+              onClick={this.handleRefreshClick}
+              pointer
+              ph1
+              pv2
+              w3
+              bg-green
+              hover-bg-dark-green
+              white
+              bn
+              mb3
+            >
+              Next
+            </Button>
+          </Div>
+
+          <Div white mb1>
+            <Text
+              name="BTC"
+              hover-green
+              green={feel.symbol === "BTC"}
+              onClick={this.handleSymbolSelect}
+              pointer
+              dib
+              mr3
+              mb2
+            >
+              BTC
+            </Text>
+
+            <Text
+              name="ETH"
+              hover-green
+              green={feel.symbol === "ETH"}
+              onClick={this.handleSymbolSelect}
+              pointer
+              dib
+              mr3
+              mb2
+            >
+              ETH
+            </Text>
+
+            <Text
+              name="LTC"
+              hover-green
+              green={feel.symbol === "LTC"}
+              onClick={this.handleSymbolSelect}
+              pointer
+              dib
+              mb2
+            >
+              LTC
+            </Text>
+          </Div>
+
+          <Div white>
+            <Text
+              name="1"
+              hover-green
+              green={feel.days === 1}
+              onClick={this.handleDurationClick}
+              pointer
+              dib
+              mr3
+              mb2
+            >
+              24 hours
+            </Text>
+
+            <Text
+              name="7"
+              hover-green
+              green={feel.days === 7}
+              onClick={this.handleDurationClick}
+              pointer
+              dib
+              mr3
+              mb2
+            >
+              7 Days
+            </Text>
+
+            <Text
+              name="30"
+              hover-green
+              green={feel.days === 30}
+              onClick={this.handleDurationClick}
+              pointer
+              dib
+              mr3
+              mb2
+            >
+              30 Days
+            </Text>
+
+            <Text
+              name="365"
+              hover-green
+              green={feel.days === 365}
+              onClick={this.handleDurationClick}
+              pointer
+              dib
+              mb2
+            >
+              365 Days
+            </Text>
+          </Div>
+        </Div>
+
         <Input
           id="permalink"
           db
+          ph1
+          pv2
           w-100
           readOnly
           value={feel.permalink}
           // action={<Button icon="copy" onClick={this.handleCopyPermalink} />}
           onClick={this.handlePermalinkClick}
         />
-
       </Div>
     )
   }

@@ -1,4 +1,4 @@
-// import { updateQueryParams } from "~/utils/history";
+import { updateQueryParams } from "../../utils/uri";
 import * as feelzApi from "../../api/feelz";
 import * as actions from "./actions";
 
@@ -25,15 +25,13 @@ export const fetchFeel = (id) => async (dispatch, getState) => {
 };
 
 export const setSymbol = (symbol) => (dispatch, getState) => {
-  // updateQueryParams({ symbol });
+  updateQueryParams({ symbol }, { pathname: "/" });
 
   dispatch(actions.setSymbol(symbol));
-  dispatch(fetchFeel());
 };
 
 export const setDays = (days) => (dispatch, getState) => {
-  // updateQueryParams({ days });
+  updateQueryParams({ days }, { pathname: "/" });
 
   dispatch(actions.setDays(days));
-  dispatch(fetchFeel());
 };
