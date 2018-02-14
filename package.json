@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development node server.js",
-    "build": "next build",
+    "build": "NODE_ENV=production next build",
     "start": "pm2 start ./server.js",
     "restart": "pm2 restart ./server.js",
     "stop": "pm2 stop ./server.js"
