@@ -60,7 +60,7 @@ export default (state = defaultState, action) => {
         ...state,
         isFetching: false,
         loading: false,
-        error: action.payload.error,
+        error: action.payload.error.message,
       }
     }
 
