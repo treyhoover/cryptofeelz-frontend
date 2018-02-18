@@ -46,7 +46,7 @@ class FeelContainer extends React.Component {
     return (
       <Div name="feel-container" bg-black vh-100 w-100 tc flex flex-column pa4 sans-serif>
 
-        <Text
+        {!feel.error && <Text
           f3
           f2-ns
           f1-l
@@ -56,13 +56,24 @@ class FeelContainer extends React.Component {
           dangerouslySetInnerHTML={{
             __html: feel.captionHtml,
           }}
-        />
+        />}
+
+        {feel.error && <Text
+          f3
+          f2-ns
+          f1-l
+          white
+          as="h1"
+          mb4
+        >
+          When you break a website...
+        </Text>}
 
         <Image
           flex-auto
           h-100
           mb4
-          src={`https://media1.giphy.com/media/${feel.gif}/200.gif`}
+          src={!feel.error ? `https://media1.giphy.com/media/${feel.gif}/200.gif` : "/static/error.gif"}
           alt={feel.caption}
           style={{ objectFit: "contain " }}
         />
