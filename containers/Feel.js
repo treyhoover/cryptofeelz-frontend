@@ -41,12 +41,14 @@ class FeelContainer extends React.Component {
   };
 
   render() {
-    const { feel } = this.props;
+    const { feel, showError } = this.props;
+
+    const error = showError || error;
 
     return (
       <Div name="feel-container" bg-black min-vh-100 w-100 tc flex flex-column pa4 sans-serif>
 
-        {!feel.error && <Text
+        {!error && <Text
           f3
           f2-ns
           f1-l
@@ -58,7 +60,7 @@ class FeelContainer extends React.Component {
           }}
         />}
 
-        {feel.error && <Text
+        {error && <Text
           f3
           f2-ns
           f1-l
@@ -73,9 +75,9 @@ class FeelContainer extends React.Component {
           flex-auto
           h-100
           mb4
-          src={!feel.error ? `https://media1.giphy.com/media/${feel.gif}/200.gif` : "/static/error.gif"}
+          src={!error ? `https://media1.giphy.com/media/${feel.gif}/200.gif` : "/static/error.gif"}
           alt={feel.caption}
-          style={{ objectFit: "contain " }}
+          style={{ objectFit: "contain", maxHeight: "50vh", }}
         />
 
         <Div name="controls" mb3>
@@ -190,19 +192,23 @@ class FeelContainer extends React.Component {
           </Div>
         </Div>
 
-        <Text as="label" db white tl mb1>Permalink</Text>
-        <Input
-          id="permalink"
-          db
-          ph1
-          pv2
-          mb2
-          w-100
-          readOnly
-          value={feel.permalink}
-          // action={<Button icon="copy" onClick={this.handleCopyPermalink} />}
-          onClick={this.handlePermalinkClick}
-        />
+        {feel.permalink && <React.Fragment>
+          <Text as="label" db white tl mb1>Permalink</Text>
+          <Input
+            id="permalink"
+            db
+            ph1
+            pv2
+            mb2
+            w-100
+            readOnly
+            value={feel.permalink}
+            disabled={!feel.permalink}
+            // action={<Button icon="copy" onClick={this.handleCopyPermalink} />}
+            onClick={this.handlePermalinkClick}
+          />
+        </React.Fragment>}
+
       </Div>
     )
   }
