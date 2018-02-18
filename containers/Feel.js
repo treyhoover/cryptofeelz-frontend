@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Div, Input, A, Button } from "reactyons";
-import { getQueryParams } from "../utils/uri";
+import { Div, Input, A, Button, Ul, Li } from "reactyons";
 import Router from "next/router";
 import { fetchFeel, setSymbol, setDays } from "../redux/feel/actionCreators";
 import Image from "../components/Image";
@@ -48,7 +47,9 @@ class FeelContainer extends React.Component {
       <Div name="feel-container" bg-black vh-100 w-100 tc flex flex-column pa4 sans-serif>
 
         <Text
-          f1
+          f3
+          f2-ns
+          f1-l
           white
           as="h1"
           mb4
@@ -178,11 +179,13 @@ class FeelContainer extends React.Component {
           </Div>
         </Div>
 
+        <Text as="label" db white tl mb1>Permalink</Text>
         <Input
           id="permalink"
           db
           ph1
           pv2
+          mb2
           w-100
           readOnly
           value={feel.permalink}
