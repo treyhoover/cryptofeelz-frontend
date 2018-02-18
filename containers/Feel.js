@@ -44,7 +44,7 @@ class FeelContainer extends React.Component {
     const { feel } = this.props;
 
     return (
-      <Div name="feel-container" bg-black vh-100 w-100 tc flex flex-column pa4 sans-serif>
+      <Div name="feel-container" bg-black min-vh-100 w-100 tc flex flex-column pa4 sans-serif>
 
         {!feel.error && <Text
           f3
